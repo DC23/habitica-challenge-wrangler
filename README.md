@@ -2,7 +2,7 @@
 Data wrangling tool for quickly selecting a winner from
 [Habitica](https://habitica.com) Challenge CSV data
 
-# Installation
+## Installation
 
 You must have Python with the [pandas library](http://pandas.pydata.org/)
 (version 0.17.0 or higher) installed.
@@ -15,7 +15,7 @@ Otherwise I suggest you use one of the scientific Python distributions, such as
 [Anaconda](https://www.continuum.io/) (Linux, Mac, Windows), or
 [WinPython](https://winpython.github.io/) (Windows only).
 
-# Usage
+## Usage
 
 First, download your Habitica challenge CSV data from the Habitica website.
 
@@ -24,7 +24,7 @@ file name as a command line argument:
 
     python challenge_wrangler.py my_challenge_data.csv
 
-# Scoring
+## Scoring
 
 The current method uses a simple numerical scoring approach. First, all
 unchecked todos have their score set to zero, and then the total score for each
