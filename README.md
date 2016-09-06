@@ -55,33 +55,33 @@ data file gives these results::
 
     Raw Scores
     ----------
-    Bob       67.110036
-    George    66.685247
-    Andy      58.722867
-    Cathy     56.962257
-    Fred      53.796485
-    Eva       46.243491
-    Jerry     43.861843
-    Dennis    38.784679
-    Irma      26.821773
-    Lola      23.501213
-    Kat       13.756975
-    Harry    -18.256840
+    Bob       67.11
+    George    66.69
+    Andy      58.72
+    Cathy     56.96
+    Fred      53.80
+    Eva       46.24
+    Jerry     43.86
+    Dennis    38.78
+    Irma      26.82
+    Lola      23.50
+    Kat       13.76
+    Harry    -18.26
 
     Categorical Scores
     ------------------
-    Bob       7.0
-    Irma      6.0
-    Andy      6.0
-    Lola      5.0
-    George    4.0
-    Fred      4.0
-    Harry     3.0
-    Eva       2.0
-    Dennis    2.0
-    Cathy     2.0
-    Jerry     1.0
-    Kat       0.0
+    Bob      7.0
+    Irma     6.0
+    Andy     6.0
+    Lola     5.0
+    George   4.0
+    Fred     4.0
+    Harry    3.0
+    Eva      2.0
+    Dennis   2.0
+    Cathy    2.0
+    Jerry    1.0
+    Kat      0.0
 
 You can see that while Bob leads the scoring in both methods, the rest of the
 leader board is quite different.
