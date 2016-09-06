@@ -44,6 +44,8 @@ for i,cn in enumerate(values.columns):
 # In this case, the winner is simply the person with the highest total score.
 sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
 
-pprint(sorted_by_score)
+print("Raw Scores")
+print(sorted_by_score.__str__())
+print()
 
 exit(0)
