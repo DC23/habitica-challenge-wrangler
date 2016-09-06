@@ -30,7 +30,7 @@ First, all unchecked todos have their score set to zero, so that a todo scores
 1 point if completed, or 0 points if unchecked. This removes the influence of
 uncompleted todo age which varies depending on when the challenge was joined.
 
-Then, two different methods are used for scoring.
+After that, two different methods are used for scoring.
 
 The first method calculates the total score across all tasks, with the winner
 being the participant with the highest total. While simple, this gives a high
@@ -84,4 +84,8 @@ data file gives these results::
     Kat      0.0
 
 You can see that while Bob leads the scoring in both methods, the rest of the
-leader board is quite different.
+leader board is quite different. For example, Irma did poorly in just one habit,
+but quite well in all other tasks. The scoring bias towards habits in the Raw
+Scores magnified the poor performance into a low total score. Once this bias is
+removed in the Categorical Scores, Irma jumped into second place.
+
