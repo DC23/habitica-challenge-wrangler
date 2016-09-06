@@ -7,6 +7,14 @@ import pandas as pd
 import sys
 from pprint import pprint
 
+
+def print_scores(header, scores):
+    """ Simple Leaderboard print function. """
+    print(header)
+    print('-' * len(header))
+    print(scores.to_string(header=False, float_format='%0.2f'))
+    print()
+
 # Load the raw challenge CSV data
 try:
     challenge_data = pd.read_csv(sys.argv[1], index_col='name')
@@ -40,18 +48,9 @@ for idx, name in enumerate(values.columns):
     if 'todo:' in name:
         values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
 
-# ----------------------------------------
-# Pick the winner
-# ----------------------------------------
-
 # First, the raw scores: the winner is simply the
 # person with the highest total score.
 sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
-
-print("Raw Scores")
-print("----------")
-pprint(sorted_by_score)
-print()
 
 # Now the categorical scores, where each task is considered individually. The
 # highest score within a task gets 1 point, the rest get 0
@@ -66,8 +65,8 @@ for idx, name in enumerate(values.columns):
 
 categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
 
-print("Categorical Scores")
-print("------------------")
-pprint(categorical_sorted_scores)
+# Print the results
+print_scores('Raw Scores', sorted_by_score)
+print_scores('Categorical Scores', categorical_sorted_scores)
 
 exit(0)
