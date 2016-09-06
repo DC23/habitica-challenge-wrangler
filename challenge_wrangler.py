@@ -49,6 +49,7 @@ for idx, name in enumerate(values.columns):
 sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
 
 print("Raw Scores")
+print("----------")
 pprint(sorted_by_score)
 print()
 
@@ -66,6 +67,7 @@ for idx, name in enumerate(values.columns):
 categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
 
 print("Categorical Scores")
+print("------------------")
 pprint(categorical_sorted_scores)
 
 exit(0)

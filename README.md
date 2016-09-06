@@ -26,28 +26,62 @@ file name as a command line argument:
 
 ## Scoring
 
-The current method uses a simple numerical scoring approach. First, all
-unchecked todos have their score set to zero, and then the total score for each
-participant is calculated. The winner is the player with the highest total
-score.
+First, all unchecked todos have their score set to zero, so that a todo scores
+1 point if completed, or 0 points if unchecked. This removes the influence of
+uncompleted todo age which varies depending on when the challenge was joined.
 
-While fair, this approach may not always be the best one. First, todos are worth
-a maximum of 1 point, while dailies can obtain much higher scores. Habits that
-are clicked multiple times a day will easily reach 50 points or more. So with
-the current scoring method, the challenge could be ***won*** by someone who does
-well on a single habit even if they failed to complete the rest of the
-challenge.
+Then, two different methods are used for scoring.
 
-To address this I plan to add a categorical scoring method. In this approach,
-each challenge task will be considered individually. The highest scoring players
-on a task will be given one point towards their final score. This way, a todo
-will have the same contribution towards the final score as a habit or daily.
+The first method calculates the total score across all tasks, with the winner
+being the participant with the highest total. While simple, this gives a high
+weight to habits, and a medium weighting to dailies relative to todos. This is
+because todos only have a value of 1 if completed and 0 if unchecked, while
+dailies increase in score for each day they are completed, and positive habits
+increase each time they are clicked. Although dailies and habits can also lose
+value, they potentially have a score much higher than 1, and habits generally
+reach higher scores than dailies if they are clicked more than once per day.
 
-An optional task weighting will be available, which will allow each task to be
-given a weight. So the challenge creator may decide that one task is worth
-5 points while others are worth 1 point.
+To address this, the second scoring method treats each task individually.
+Participants with the highest score on a task get 1 point for that task, while
+everyone else gets 0 points. Then totals are calculated and displayed. This
+method levels the playing field, with equal weighting given to every daily,
+habit, and todo.
 
-Finally, I will be adding an option to randomly select a single participant as
-the winner in the event of a tie for first place.
+A future function will allow a manual weighting for each task, so you can decide
+if a particular task is worth more or less than the others.
 
-Once implemented, I will include a full sample run here.
+These two approaches may give a different leaders board. For example, the test
+data file gives these results::
+
+    Raw Scores
+    ----------
+    Bob       67.110036
+    George    66.685247
+    Andy      58.722867
+    Cathy     56.962257
+    Fred      53.796485
+    Eva       46.243491
+    Jerry     43.861843
+    Dennis    38.784679
+    Irma      26.821773
+    Lola      23.501213
+    Kat       13.756975
+    Harry    -18.256840
+
+    Categorical Scores
+    ------------------
+    Bob       7.0
+    Irma      6.0
+    Andy      6.0
+    Lola      5.0
+    George    4.0
+    Fred      4.0
+    Harry     3.0
+    Eva       2.0
+    Dennis    2.0
+    Cathy     2.0
+    Jerry     1.0
+    Kat       0.0
+
+You can see that while Bob leads the scoring in both methods, the rest of the
+leader board is quite different.
