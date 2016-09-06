@@ -49,10 +49,6 @@ for idx, name in enumerate(values.columns):
     if 'todo:' in name:
         values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
 
-# First, the raw scores: the winner is simply the
-# person with the highest total score.
-sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
-
 # Now the categorical scores, where each task is considered individually. The
 # highest score within a task gets 1 point, the rest get 0
 for idx, name in enumerate(values.columns):
@@ -67,7 +63,6 @@ for idx, name in enumerate(values.columns):
 categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
 
 # Print the results
-print_scores('Raw Scores', sorted_by_score)
-print_scores('Categorical Scores', categorical_sorted_scores)
+print_scores('Scores', categorical_sorted_scores)
 
 exit(0)
