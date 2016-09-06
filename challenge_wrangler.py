@@ -49,20 +49,10 @@ for idx, name in enumerate(values.columns):
     if 'todo:' in name:
         values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
 
-# Now the categorical scores, where each task is considered individually. The
-# highest score within a task gets 1 point, the rest get 0
-for idx, name in enumerate(values.columns):
-    highest = values.iloc[:,idx].max()
-    values.iloc[:,idx][values.iloc[:,idx] < highest] = 0
-    # don't give any points if the highest score is 0 and this is a todo.
-    if highest == 0 and 'todo:' in name:
-        values.iloc[:,idx][values.iloc[:,idx] == highest] = 0
-    else:
-        values.iloc[:,idx][values.iloc[:,idx] == highest] = 1
+pprint(values['daily:Cast a Party Buff'])
+ranked = values.rank(axis=0, method='average')
 
-categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
-
-# Print the results
-print_scores('Scores', categorical_sorted_scores)
+sorted_scores = ranked.sum(axis=1).sort_values(ascending=False)
+pprint(sorted_scores)
 
 exit(0)
