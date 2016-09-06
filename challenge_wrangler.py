@@ -36,16 +36,36 @@ challenge_data.rename(columns=new_columns, inplace=True)
 values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
 # Set incomplete Todos to have a value of 0
-for i,cn in enumerate(values.columns):
-    if 'todo:' in cn:
-        values.iloc[:,i][values.iloc[:,i] < 1] = 0
+for idx, name in enumerate(values.columns):
+    if 'todo:' in name:
+        values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
 
+# ----------------------------------------
 # Pick the winner
-# In this case, the winner is simply the person with the highest total score.
+# ----------------------------------------
+
+# First, the raw scores: the winner is simply the
+# person with the highest total score.
 sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
 
 print("Raw Scores")
-print(sorted_by_score.__str__())
+pprint(sorted_by_score)
 print()
+
+# Now the categorical scores, where each task is considered individually. The
+# highest score within a task gets 1 point, the rest get 0
+for idx, name in enumerate(values.columns):
+    highest = values.iloc[:,idx].max()
+    values.iloc[:,idx][values.iloc[:,idx] < highest] = 0
+    # don't give any points if the highest score is 0 and this is a todo.
+    if highest == 0 and 'todo:' in name:
+        values.iloc[:,idx][values.iloc[:,idx] == highest] = 0
+    else:
+        values.iloc[:,idx][values.iloc[:,idx] == highest] = 1
+
+categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
+
+print("Categorical Scores")
+pprint(categorical_sorted_scores)
 
 exit(0)
