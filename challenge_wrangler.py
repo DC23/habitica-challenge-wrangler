@@ -44,15 +44,17 @@ challenge_data.rename(columns=new_columns, inplace=True)
 # Now reshape the data into a more tractable layout
 values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
-# Set incomplete Todos to have a value of 0
+# Set incomplete Todos to have a value of None
 for idx, name in enumerate(values.columns):
     if 'todo:' in name:
-        values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
+        values.iloc[:,idx][values.iloc[:,idx] < 1] = None
 
-pprint(values['daily:Cast a Party Buff'])
-ranked = values.rank(axis=0, method='average')
+pprint(values)
+# pprint(values['daily:Cast a Party Buff'])
+ranked = values.rank(axis=0, method='min', ascending=False)
+pprint(ranked)
 
-sorted_scores = ranked.sum(axis=1).sort_values(ascending=False)
+sorted_scores = ranked.sum(axis=1).sort_values(ascending=True)
 pprint(sorted_scores)
 
 exit(0)
