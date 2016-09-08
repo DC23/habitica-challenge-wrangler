@@ -43,7 +43,7 @@ Finally, the ranking scores are averaged for each participant. The participant
 with the highest average placing in each task (lowest average ranking) is
 considered the winner.
 
-### Ties
+### Tie Breaks
 
 In the event of a tie for first place, the names of all tied participants are
-printed, and a random winner is selected from the first place entrants.
+printed, and a random winner is selected.
