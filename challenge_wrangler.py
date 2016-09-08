@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Data wrangling tool for quickly selecting a winner from Habitica Challenge CSV
 data.
@@ -43,30 +44,19 @@ challenge_data.rename(columns=new_columns, inplace=True)
 # Now reshape the data into a more tractable layout
 values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
-# Set incomplete Todos to have a value of 0
+# Set incomplete Todos to have a value of None
 for idx, name in enumerate(values.columns):
     if 'todo:' in name:
-        values.iloc[:,idx][values.iloc[:,idx] < 1] = 0
+        values.iloc[:,idx][values.iloc[:,idx] < 1] = None
 
-# First, the raw scores: the winner is simply the
-# person with the highest total score.
-sorted_by_score = values.sum(axis=1).sort_values(ascending=False)
+# Rank each task, first place gets 1 point, second gets 2 points etc
+ranked = values.rank(axis=0, method='min', ascending=False)
 
-# Now the categorical scores, where each task is considered individually. The
-# highest score within a task gets 1 point, the rest get 0
-for idx, name in enumerate(values.columns):
-    highest = values.iloc[:,idx].max()
-    values.iloc[:,idx][values.iloc[:,idx] < highest] = 0
-    # don't give any points if the highest score is 0 and this is a todo.
-    if highest == 0 and 'todo:' in name:
-        values.iloc[:,idx][values.iloc[:,idx] == highest] = 0
-    else:
-        values.iloc[:,idx][values.iloc[:,idx] == highest] = 1
+# Sum the scores for each participant, and sort into ascending order
+sorted_scores = ranked.sum(axis=1).sort_values(ascending=True)
 
-categorical_sorted_scores = values.sum(axis=1).sort_values(ascending=False)
-
-# Print the results
-print_scores('Raw Scores', sorted_by_score)
-print_scores('Categorical Scores', categorical_sorted_scores)
+# Display the leaderboard
+n = int(sys.argv[2]) if len(sys.argv) > 2 else None
+print_scores('Leaderboard - lower score is better', sorted_scores[:n])
 
 exit(0)

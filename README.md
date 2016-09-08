@@ -24,68 +24,20 @@ file name as a command line argument:
 
     python challenge_wrangler.py my_challenge_data.csv
 
+By default, the leaderboard showing the top 20 participants is displayed. The
+number of participants to display can be specified with a second command line
+argument:
+
+    python challenge_wrangler.py my_challenge_data.csv 10
+
 ## Scoring
 
 First, all unchecked todos have their score set to zero, so that a todo scores
 1 point if completed, or 0 points if unchecked. This removes the influence of
 uncompleted todo age which varies depending on when the challenge was joined.
 
-After that, two different methods are used for scoring.
+After that adjustment, each task is considered separately. Scores are ranked,
+with the participants in first place getting 3 points, second place getting 2,
+and third place getting 1 point.
 
-The first method calculates the total score across all tasks, with the winner
-being the participant with the highest total. While simple, this gives a high
-weight to habits, and a medium weighting to dailies relative to todos. This is
-because todos only have a value of 1 if completed and 0 if unchecked, while
-dailies increase in score for each day they are completed, and positive habits
-increase each time they are clicked. Although dailies and habits can also lose
-value, they potentially have a score much higher than 1, and habits generally
-reach higher scores than dailies if they are clicked more than once per day.
-
-To address this, the second scoring method treats each task individually.
-Participants with the highest score on a task get 1 point for that task, while
-everyone else gets 0 points. Then totals are calculated and displayed. This
-method levels the playing field, with equal weighting given to every daily,
-habit, and todo.
-
-A future function will allow a manual weighting for each task, so you can decide
-if a particular task is worth more or less than the others.
-
-These two approaches may give a different leaders board. For example, the test
-data file gives these results::
-
-    Raw Scores
-    ----------
-    Bob       67.11
-    George    66.69
-    Andy      58.72
-    Cathy     56.96
-    Fred      53.80
-    Eva       46.24
-    Jerry     43.86
-    Dennis    38.78
-    Irma      26.82
-    Lola      23.50
-    Kat       13.76
-    Harry    -18.26
-
-    Categorical Scores
-    ------------------
-    Bob      7.0
-    Irma     6.0
-    Andy     6.0
-    Lola     5.0
-    George   4.0
-    Fred     4.0
-    Harry    3.0
-    Eva      2.0
-    Dennis   2.0
-    Cathy    2.0
-    Jerry    1.0
-    Kat      0.0
-
-You can see that while Bob leads the scoring in both methods, the rest of the
-leader board is quite different. For example, Irma did poorly in just one habit,
-but quite well in all other tasks. The scoring bias towards habits in the Raw
-Scores magnified the poor performance into a low total score. Once this bias is
-removed in the Categorical Scores, Irma jumped into second place.
-
+Finally, scores for all tasks are summed to produce the final leader board.
