@@ -24,6 +24,12 @@ file name as a command line argument:
 
     python challenge_wrangler.py my_challenge_data.csv
 
+By default, the leaderboard showing the top 20 participants is displayed. The
+number of participants to display can be specified with a second command line
+argument:
+
+    python challenge_wrangler.py my_challenge_data.csv 10
+
 ## Scoring
 
 First, all unchecked todos have their score set to zero, so that a todo scores

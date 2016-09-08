@@ -49,12 +49,14 @@ for idx, name in enumerate(values.columns):
     if 'todo:' in name:
         values.iloc[:,idx][values.iloc[:,idx] < 1] = None
 
-pprint(values)
-# pprint(values['daily:Cast a Party Buff'])
+# Rank each task, first place gets 1 point, second gets 2 points etc
 ranked = values.rank(axis=0, method='min', ascending=False)
-pprint(ranked)
 
+# Sum the scores for each participant, and sort into ascending order
 sorted_scores = ranked.sum(axis=1).sort_values(ascending=True)
-pprint(sorted_scores)
+
+# Display the leaderboard
+n = int(sys.argv[2]) if len(sys.argv) > 2 else None
+print_scores('Leaderboard - lower score is better', sorted_scores[:n])
 
 exit(0)
