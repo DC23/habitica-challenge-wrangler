@@ -32,12 +32,13 @@ argument:
 
 ## Scoring
 
-First, all unchecked todos have their score set to zero, so that a todo scores
-1 point if completed, or 0 points if unchecked. This removes the influence of
-uncompleted todo age which varies depending on when the challenge was joined.
+Each task is considered separately. Scores are ranked from first to last, with
+first place getting 1 point, second place getting 2 points, and so on through to
+last place.
 
-After that adjustment, each task is considered separately. Scores are ranked,
-with the participants in first place getting 3 points, second place getting 2,
-and third place getting 1 point.
+For todos, a completed todo is treated as equal first place while incomplete
+todos are scored as equal last place.
 
-Finally, scores for all tasks are summed to produce the final leader board.
+Finally, the ranking scores are averaged for each participant. The participant
+with the highest average placing in each task (lowest average ranking) is
+considered the winner.

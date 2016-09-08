@@ -49,14 +49,26 @@ for idx, name in enumerate(values.columns):
     if 'todo:' in name:
         values.iloc[:,idx][values.iloc[:,idx] < 1] = None
 
-# Rank each task, first place gets 1 point, second gets 2 points etc
-ranked = values.rank(axis=0, method='min', ascending=False)
+# rank the scores
+ranked = values.rank(axis=0, method='max', ascending=False)
+
+# after ranking, each completed todo will have a value equal to the number of
+# participants that completed the todo. This gives todos a variable value.
+# Setting them to a consistent value is more fair.
+incomplete_todo_score = len(values)
+completed_todo_score = 1
+for idx, name in enumerate(ranked.columns):
+    if 'todo:' in name:
+        null_mask = pd.isnull(ranked.iloc[:,idx])
+        not_null_mask = pd.notnull(ranked.iloc[:,idx])
+        ranked.iloc[:,idx][null_mask] = incomplete_todo_score
+        ranked.iloc[:,idx][not_null_mask] = completed_todo_score
 
 # Sum the scores for each participant, and sort into ascending order
-sorted_scores = ranked.sum(axis=1).sort_values(ascending=True)
+sorted_scores = ranked.mean(axis=1).sort_values(ascending=True)
 
 # Display the leaderboard
 n = int(sys.argv[2]) if len(sys.argv) > 2 else None
-print_scores('Leaderboard - lower score is better', sorted_scores[:n])
+print_scores('Leaderboard - average placing in all challenge tasks - lower is better', sorted_scores[:n])
 
 exit(0)
