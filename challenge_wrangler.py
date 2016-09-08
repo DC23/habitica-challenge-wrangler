@@ -4,6 +4,7 @@ Data wrangling tool for quickly selecting a winner from Habitica Challenge CSV
 data.
 
 """
+import numpy as np
 import pandas as pd
 import sys
 from pprint import pprint
@@ -70,5 +71,16 @@ sorted_scores = ranked.mean(axis=1).sort_values(ascending=True)
 # Display the leaderboard
 n = int(sys.argv[2]) if len(sys.argv) > 2 else None
 print_scores('Leaderboard - average placing in all challenge tasks - lower is better', sorted_scores[:n])
+
+# rank the sorted scores to detect a tie for first place
+ranked_sorted = sorted_scores.rank(axis=0, method='min', ascending=True)
+first_place = ranked_sorted[ranked_sorted == 1].index.values
+if len(first_place) > 1:
+    print('You have a tie for first place, between:')
+    print('    ' + ', '.join(first_place))
+    print()
+    print('The randomly selected winner is: {0}'.format(
+        np.random.choice(first_place)))
+    print()
 
 exit(0)
