@@ -1,6 +1,6 @@
 # habitica-challenge-wrangler
 Data wrangling tool for quickly selecting a winner from
-[Habitica](https://habitica.com) Challenge CSV data
+[Habitica](https://habitica.com) Challenge CSV data.
 
 ## Installation
 
@@ -40,8 +40,7 @@ For todos, a completed todo is treated as equal first place while incomplete
 todos are scored as equal last place.
 
 Finally, the ranking scores are averaged for each participant. The participant
-with the highest average placing in each task (lowest average ranking) is
-considered the winner.
+with the highest average placing in each task is considered the winner.
 
 ### Tie Breaks
 
