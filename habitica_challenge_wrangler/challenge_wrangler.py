@@ -26,7 +26,9 @@ def print_scores(header, scores):
 def pick_winner():
     """Habitica Challenge Data Wrangler"""
 
-    print('{0} - Version 1.1.1'.format(sys.argv[0]))
+    print('pick_winner - Version 1.1.1')
+    print('===========================')
+    print()
 
     # Load the raw challenge CSV data
     try:
