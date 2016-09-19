@@ -62,7 +62,8 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/technical.html#install-requires-vs-requirements-files
     install_requires=[
-        # 'pandas>=0.17.0',
+        'future',
+        'pandas>=0.17.0',
     ],
 
     # List additional groups of dependencies here (e.g. development
