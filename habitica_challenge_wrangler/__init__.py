@@ -5,7 +5,7 @@
 """
 __author__ = 'DC23'
 __email__ = 'jugglindan@gmail.com'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
 from .challenge_wrangler import pick_winner
 
