@@ -2,6 +2,10 @@
 Data wrangling tool for quickly selecting a winner from
 [Habitica](https://habitica.com) Challenge CSV data.
 
+* Free software: Apache 2.0
+* Homepage: https://github.com/DC23/habitica-challenge-wrangler
+* Version: 1.0.0
+
 ## Installation
 
 To install the latest release from [PyPI](https://pypi.python.org/pypi):
