@@ -1,0 +1,12 @@
+# Directories to include
+graft examples
+
+# Directories to exclude
+prune docs
+
+# Files to include
+include LICENSE
+include README.md
+
+# File patterns to exclude wherever they are found
+global-exclude *.py[co] __pycache__ *.so *.pyd

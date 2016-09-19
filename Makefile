@@ -18,7 +18,6 @@ help:
 	echo '  * uninstall: removes the development package from pip.'
 	echo '  * lint: runs pylint.'
 	echo '  * sdist: builds a source distribution.'
-	echo '  * register: register package with PiPY.'
 	echo '  * upload: uploads a package to PiPY.'
 
 .PHONY: clean
@@ -51,10 +50,6 @@ lint:
 .PHONY: sdist
 sdist:
 	python setup.py sdist
-
-.PHONY: register
-register: 
-	python setup.py register
 
 .PHONY: upload
 upload: clean
