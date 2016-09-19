@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='habitica-challenge-wrangler',
-    version='1.1.2',
+    version='1.1.3',
     description='Habitica Challenge Data Wrangler - pick winners from challenge data',
     long_description=long_description,
     url='https://github.com/DC23/habitica-challenge-wrangler',
