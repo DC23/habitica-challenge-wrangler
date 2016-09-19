@@ -12,7 +12,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 
 setup(
-    name='habitica_challenge_wrangler',
+    name='habitica-challenge-wrangler',
     version='1.0.0',
     description='Habitica Challenge Data Wrangler - pick winners from challenge data',
     long_description=long_description,
@@ -82,7 +82,7 @@ setup(
     # Delete either or both of these if not required (and remove the corresponding imports in the package __init__.py
     entry_points={
         'console_scripts': [
-            'pick_winner = habitica_challenge_wrangler:pick_winner',
+            'pick-winner = habitica_challenge_wrangler:pick_winner',
         ],
     },
 
