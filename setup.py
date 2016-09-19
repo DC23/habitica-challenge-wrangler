@@ -66,24 +66,13 @@ setup(
         'pandas>=0.17.0',
     ],
 
-    # List additional groups of dependencies here (e.g. development
-    # dependencies).
-    # You can install these using the following syntax, for example:
-    # $ pip install -e .[dev,test]
-    extras_require={
-        'dev': [
-        ],
-        'test': [
-        ],
-    },
-
     # To provide executable scripts, use entry points in preference to the
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.
     # Delete either or both of these if not required (and remove the corresponding imports in the package __init__.py
     entry_points={
         'console_scripts': [
-            'challenge_wrangler = habitica_challenge_wrangler:start',
+            'pick_winner = habitica_challenge_wrangler:pick_winner',
         ],
     },
 

@@ -23,7 +23,7 @@ def print_scores(header, scores):
     print(scores.to_string(header=False, float_format='%0.2f'))
     print()
 
-def start():
+def pick_winner():
     """Habitica Challenge Data Wrangler"""
     # Load the raw challenge CSV data
     try:

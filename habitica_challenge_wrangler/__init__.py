@@ -3,4 +3,4 @@
 
     Data analysis tool for selecting winners from Habitica challenge data.
 """
-from .challenge_wrangler import start
+from .challenge_wrangler import pick_winner
