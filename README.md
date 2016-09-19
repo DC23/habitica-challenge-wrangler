@@ -2,16 +2,23 @@
 Data wrangling tool for quickly selecting a winner from
 [Habitica](https://habitica.com) Challenge CSV data.
 
+* Free software: Apache 2.0
+* Homepage: https://github.com/DC23/habitica-challenge-wrangler
+* Version: 1.1.2
+
 ## Installation
 
-You must have Python with the [pandas library](http://pandas.pydata.org/)
-(version 0.17.0 or higher) installed.
+To install the latest release from [PyPI](https://pypi.python.org/pypi):
 
-If you use `pip`, you can install with the command:
+    pip install habitica-challenge-wrangler
 
-    pip install -r requirements.txt
+If you already have `habitica-challenge-wrangler` installed, then upgrade with:
 
-Otherwise I suggest you use one of the scientific Python distributions, such as
+    pip install --upgrade habitica-challenge-wrangler
+
+This application requires the [pandas library](http://pandas.pydata.org/), 
+version 0.17.0 or higher. If you have trouble installing with pip, then
+I suggest you use one of the scientific Python distributions, such as
 [Anaconda](https://www.continuum.io/) (Linux, Mac, Windows), or
 [WinPython](https://winpython.github.io/) (Windows only).
 
@@ -19,16 +26,16 @@ Otherwise I suggest you use one of the scientific Python distributions, such as
 
 First, download your Habitica challenge CSV data from the Habitica website.
 
-Then execute the `challenge_wrangler.py` script, passing the downloaded CSV
+Then execute the `pick-winner` script, passing the downloaded CSV
 file name as a command line argument:
 
-    python challenge_wrangler.py my_challenge_data.csv
+    pick-winner my_challenge_data.csv
 
 By default, the leaderboard showing the top 20 participants is displayed. The
 number of participants to display can be specified with a second command line
 argument:
 
-    python challenge_wrangler.py my_challenge_data.csv 10
+    pick-winner my_challenge_data.csv 10
 
 ## Scoring
 
