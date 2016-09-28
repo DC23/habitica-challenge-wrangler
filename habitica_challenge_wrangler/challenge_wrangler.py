@@ -29,7 +29,7 @@ def print_scores(header, scores):
 def pick_winner():
     """Habitica Challenge Data Wrangler"""
 
-    print('pick_winner - Version 1.1.3')
+    print('pick_winner - Version 2.0.0')
     print('===========================')
     print()
 

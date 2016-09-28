@@ -4,7 +4,7 @@ Data wrangling tool for quickly selecting a winner from
 
 * Free software: Apache 2.0
 * Homepage: https://github.com/DC23/habitica-challenge-wrangler
-* Version: 1.1.3
+* Version: 2.0.0
 
 ## Installation
 
