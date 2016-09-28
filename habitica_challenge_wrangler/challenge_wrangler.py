@@ -63,6 +63,10 @@ def pick_winner():
     # Now reshape the data into a more tractable layout
     values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
+    # take a copy of the values for spreadsheet output
+    if options.to_excel:
+        original_values = values.copy(deep=True)
+
     # Set incomplete Todos to have a value of None
     for idx, name in enumerate(values.columns):
         if 'todo:' in name:
@@ -92,7 +96,7 @@ def pick_winner():
         excelname = basename + '_data.xls'
         with pd.ExcelWriter(excelname) as writer:
             challenge_data.to_excel(writer, sheet_name='raw')
-            values.to_excel(writer, sheet_name='reshaped')
+            original_values.to_excel(writer, sheet_name='reshaped')
             ranked.to_excel(writer, sheet_name='placings')
             pd.DataFrame(data=sorted_scores).to_excel(
                 writer,
