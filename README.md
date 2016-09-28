@@ -37,6 +37,21 @@ option:
 
     pick-winner --input-file my_challenge_data.csv --leaderboard-rows 5
 
+The intermediate data products can optionally be written to a spreadsheet with
+the `to-excel` command:
+
+    pick-winner --input-file my_challenge_data.csv --to-excel
+
+This will write a single excel file (the name is based on your input file name),
+with several sheets.
+
+* raw: The raw challenge data.
+* reshaped: The raw challenge data in a more flexible layout compared to the raw
+  data.
+* placings: Participant placings in each task.
+* final scores: The complete final scores.
+    
+
 ## Scoring
 
 Each task is considered separately. Scores are ranked from first to last, with

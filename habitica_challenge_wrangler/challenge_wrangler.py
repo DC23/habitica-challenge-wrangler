@@ -92,7 +92,7 @@ def pick_winner():
         excelname = basename + '_data.xls'
         with pd.ExcelWriter(excelname) as writer:
             challenge_data.to_excel(writer, sheet_name='raw')
-            values.to_excel(writer, sheet_name='values')
+            values.to_excel(writer, sheet_name='reshaped')
             ranked.to_excel(writer, sheet_name='placings')
             pd.DataFrame(data=sorted_scores).to_excel(
                 writer,
