@@ -12,8 +12,11 @@ from __future__ import (
     unicode_literals)
 from builtins import *
 import numpy as np
+import os
 import pandas as pd
 import sys
+
+from .configuration import get_options
 
 
 def print_scores(header, scores):
@@ -30,11 +33,13 @@ def pick_winner():
     print('===========================')
     print()
 
+    options = get_options()
+
     # Load the raw challenge CSV data
     try:
-        challenge_data = pd.read_csv(sys.argv[1], index_col='name')
+        challenge_data = pd.read_csv(options.input_file, index_col='name')
     except IndexError as e:
-        print("You must supply the Challenge data CSV file as the only command line argument")
+        print("Error opening input data file")
         exit(-1)
 
     # Rename the score columns to the task name. It makes things a lot easier!
@@ -57,6 +62,10 @@ def pick_winner():
 
     # Now reshape the data into a more tractable layout
     values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
+
+    # take a copy of the values for spreadsheet output
+    if options.to_excel:
+        original_values = values.copy(deep=True)
 
     # Set incomplete Todos to have a value of None
     for idx, name in enumerate(values.columns):
@@ -81,8 +90,20 @@ def pick_winner():
     # Sum the scores for each participant, and sort into ascending order
     sorted_scores = ranked.mean(axis=1).sort_values(ascending=True)
 
+    # sorted_scores.to_csv('sorted.csv')
+    if options.to_excel:
+        basename = os.path.splitext(os.path.basename(options.input_file))[0]
+        excelname = basename + '_data.xls'
+        with pd.ExcelWriter(excelname) as writer:
+            challenge_data.to_excel(writer, sheet_name='raw')
+            original_values.to_excel(writer, sheet_name='reshaped')
+            ranked.to_excel(writer, sheet_name='placings')
+            pd.DataFrame(data=sorted_scores).to_excel(
+                writer,
+                sheet_name='final scores')
+
     # Display the leaderboard
-    n = int(sys.argv[2]) if len(sys.argv) > 2 else None
+    n = options.leaderboard_rows
     print_scores('Leaderboard - average placing in all challenge tasks - lower is better', sorted_scores[:n])
 
     # rank the sorted scores to detect a tie for first place
