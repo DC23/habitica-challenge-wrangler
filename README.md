@@ -29,13 +29,13 @@ First, download your Habitica challenge CSV data from the Habitica website.
 Then execute the `pick-winner` script, passing the downloaded CSV
 file name as a command line argument:
 
-    pick-winner my_challenge_data.csv
+    pick-winner --input-file my_challenge_data.csv
 
-By default, the leaderboard showing the top 20 participants is displayed. The
-number of participants to display can be specified with a second command line
-argument:
+By default, the leaderboard showing the top 10 participants is displayed. The
+number of participants to display can be specified with the `--leaderboard-rows`
+option:
 
-    pick-winner my_challenge_data.csv 10
+    pick-winner --input-file my_challenge_data.csv --leaderboard-rows 5
 
 ## Scoring
 
