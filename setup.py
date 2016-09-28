@@ -64,6 +64,7 @@ setup(
     install_requires=[
         'future',
         'pandas>=0.17.0',
+        'xlwt',
     ],
 
     # List additional groups of dependencies here (e.g. development

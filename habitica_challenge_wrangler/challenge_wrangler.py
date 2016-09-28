@@ -12,6 +12,7 @@ from __future__ import (
     unicode_literals)
 from builtins import *
 import numpy as np
+import os
 import pandas as pd
 import sys
 
@@ -62,8 +63,6 @@ def pick_winner():
     # Now reshape the data into a more tractable layout
     values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
-    # values.to_csv('values.csv')
-
     # Set incomplete Todos to have a value of None
     for idx, name in enumerate(values.columns):
         if 'todo:' in name:
@@ -84,12 +83,20 @@ def pick_winner():
             ranked.iloc[:,idx][null_mask] = incomplete_todo_score
             ranked.iloc[:,idx][not_null_mask] = completed_todo_score
 
-    # ranked.to_csv('ranked.csv')
-
     # Sum the scores for each participant, and sort into ascending order
     sorted_scores = ranked.mean(axis=1).sort_values(ascending=True)
 
     # sorted_scores.to_csv('sorted.csv')
+    if options.to_excel:
+        basename = os.path.splitext(os.path.basename(options.input_file))[0]
+        excelname = basename + '_data.xls'
+        with pd.ExcelWriter(excelname) as writer:
+            challenge_data.to_excel(writer, sheet_name='raw')
+            values.to_excel(writer, sheet_name='values')
+            ranked.to_excel(writer, sheet_name='placings')
+            pd.DataFrame(data=sorted_scores).to_excel(
+                writer,
+                sheet_name='final scores')
 
     # Display the leaderboard
     n = options.leaderboard_rows
