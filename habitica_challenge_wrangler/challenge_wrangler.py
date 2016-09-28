@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 import sys
 
+from .configuration import get_options
+
 
 def print_scores(header, scores):
     """ Simple Leaderboard print function. """
@@ -30,11 +32,13 @@ def pick_winner():
     print('===========================')
     print()
 
+    options = get_options()
+
     # Load the raw challenge CSV data
     try:
-        challenge_data = pd.read_csv(sys.argv[1], index_col='name')
+        challenge_data = pd.read_csv(options.input_file, index_col='name')
     except IndexError as e:
-        print("You must supply the Challenge data CSV file as the only command line argument")
+        print("Error opening input data file")
         exit(-1)
 
     # Rename the score columns to the task name. It makes things a lot easier!
@@ -58,6 +62,8 @@ def pick_winner():
     # Now reshape the data into a more tractable layout
     values = pd.DataFrame(data=challenge_data, columns=new_columns.values())
 
+    # values.to_csv('values.csv')
+
     # Set incomplete Todos to have a value of None
     for idx, name in enumerate(values.columns):
         if 'todo:' in name:
@@ -78,11 +84,15 @@ def pick_winner():
             ranked.iloc[:,idx][null_mask] = incomplete_todo_score
             ranked.iloc[:,idx][not_null_mask] = completed_todo_score
 
+    # ranked.to_csv('ranked.csv')
+
     # Sum the scores for each participant, and sort into ascending order
     sorted_scores = ranked.mean(axis=1).sort_values(ascending=True)
 
+    # sorted_scores.to_csv('sorted.csv')
+
     # Display the leaderboard
-    n = int(sys.argv[2]) if len(sys.argv) > 2 else None
+    n = options.leaderboard_rows
     print_scores('Leaderboard - average placing in all challenge tasks - lower is better', sorted_scores[:n])
 
     # rank the sorted scores to detect a tie for first place
