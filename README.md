@@ -22,6 +22,10 @@ I suggest you use one of the scientific Python distributions, such as
 [Anaconda](https://www.continuum.io/) (Linux, Mac, Windows), or
 [WinPython](https://winpython.github.io/) (Windows only).
 
+To uninstall, simply use pip again:
+
+    pip uninstall habitica-challenge-wrangler
+
 ## Usage
 
 First, download your Habitica challenge CSV data from the Habitica website.
